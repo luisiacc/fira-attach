@@ -27,7 +27,7 @@ def do_the_thing():
         elif path.is_file():
             attach_fira(path)
         else:
-            sys.stderr.write(f"Not supported font type ({str(path)}). \n")
+            sys.stderr.write(f"Not supported file ({str(path)}). \n")
 
 
 def attach_fira_on_folder(folder: Path):
