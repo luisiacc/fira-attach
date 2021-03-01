@@ -5,6 +5,7 @@
 
 import sys
 import os
+import shutil
 from subprocess import Popen
 from pathlib import Path
 
@@ -14,7 +15,9 @@ FIRA_CODE_FILE_NAME = "Fira Code Light Nerd Font Complete Mono.ttf"
 FIRA_PATH = cwd / "font" / FIRA_CODE_FILE_NAME
 
 OUTPUT_FOLDER_NAME = "output"
-OUTPUT_FOLDER = cwd / OUTPUT_FOLDER_NAME
+OUTPUT_PATH = cwd / OUTPUT_FOLDER_NAME
+
+ACCEPTED_FONT_EXTENSIONS = ("*.ttf", "*.otf")
 
 
 def do_the_thing():
@@ -31,18 +34,20 @@ def do_the_thing():
 
 
 def attach_fira_on_folder(folder: Path):
-    for file in list(folder.glob("*.ttf")) + list(folder.glob("*.otf")):
-        attach_fira(file)
+    for extension in ACCEPTED_FONT_EXTENSIONS:
+        for file in folder.glob(extension):
+            attach_fira(file)
 
 
 def check_output_folder():
-    if not os.path.exists("output"):
-        os.mkdir("output")
+    if not os.path.exists(OUTPUT_FOLDER_NAME):
+        os.mkdir(OUTPUT_FOLDER_NAME)
 
 
 def attach_fira(font: Path):
     final_name = f"{removesuffix(font.name, font.suffix)} - FiraAttached.ttf"
     run(["./mergefonts.sh", font, FIRA_PATH, final_name])
+    shutil.move(final_name, OUTPUT_PATH / final_name)
     print(f"Attached Fira Code glyphs to {font.name}")
 
 
