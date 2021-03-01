@@ -18,7 +18,7 @@ glyphs like the round corners, etc...
 
 ## Dependencies 🏁
 
-- Fontforge (see [install instructions](http://designwithfontforge.com/en-US/Installing_Fontforge.html))
+- Fontforge installed on your system (see [install instructions](http://designwithfontforge.com/en-US/Installing_Fontforge.html))
 
 ## Output 👉
 
